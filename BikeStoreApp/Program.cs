@@ -1,5 +1,7 @@
 
+using AutoMapper;
 using BikeStoreApp.Models;
+using BikeStoreApp.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace BikeStoreApp
@@ -18,6 +20,9 @@ namespace BikeStoreApp
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<BikeStoreAppContext>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<IBrandService, BrandService>();
+            builder.Services.AddAutoMapper(typeof(Mapper));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
