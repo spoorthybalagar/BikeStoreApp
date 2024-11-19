@@ -6,17 +6,9 @@ namespace BikeStoreApp.Services
     {
         // Retrieve all stocks
         Task<IEnumerable<ResponseStockDto>> GetAllStocksAsync();
-
-        // Retrieve stock by StoreId and ProductId
-        Task<ResponseStockDto?> GetStockByIdAsync(int storeId, int productId);
-
-        // Add new stock
-        Task<bool> AddStockAsync(CreateStockDto dto);
-
-        // Update stock
-        Task<bool> UpdateStockAsync(UpdateStockDto dto);
-
-        // Delete stock
+        Task<ResponseStockDto> GetStockByIdAsync(int storeId, int productId);
+        Task<bool> AddStockAsync(CreateStockDto createStockDto);
+        Task<bool> UpdateStockAsync(UpdateStockDto updateStockDto);
         Task<bool> DeleteStockAsync(int storeId, int productId);
     }
 }

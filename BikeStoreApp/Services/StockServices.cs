@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BikeStoreApp.Services
 {
-    public class StockServices
+    public class StockServices:IStockServices
     {
         private readonly BikeStoreAppContext _context;
 
