@@ -1,19 +1,37 @@
-﻿namespace BikeStoreApp.Dto
+﻿using System.Text.Json.Serialization;
+
+namespace BikeStoreApp.Dto
 {
     public class ResponseOrderDto
     {
         public int OrderId { get; set; }
-        public int? CustomerId { get; set; }
-        public string? CustomerName { get; set; } // Optional, fetched via navigation property
+        public int CustomerId { get; set; }
+        public string CustomerName { get; set; } // Optional: Combine FirstName and LastName
         public byte OrderStatus { get; set; }
-        public DateOnly OrderDate { get; set; }
-        public DateOnly RequiredDate { get; set; }
-        public DateOnly? ShippedDate { get; set; }
+        [JsonPropertyName("orderDate")]
+        public string OrderDateString
+        {
+            get => OrderDate.ToString("yyyy-MM-dd");
+            set => OrderDate = DateOnly.Parse(value);
+        }
+
+        [JsonIgnore]
+        public DateOnly OrderDate { get; private set; }
+
+        [JsonPropertyName("requiredDate")]
+        public string RequiredDateString
+        {
+            get => RequiredDate.ToString("yyyy-MM-dd");
+            set => RequiredDate = DateOnly.Parse(value);
+        }
+
+        [JsonIgnore]
+        public DateOnly RequiredDate { get; private set; }
         public int StoreId { get; set; }
-        public string StoreName { get; set; } // Optional, fetched via navigation property
+        public string StoreName { get; set; }
         public int StaffId { get; set; }
-        public string StaffName { get; set; } // Optional, fetched via navigation property
-        public List<ResponseOrderItemDto> OrderItems { get; set; } = new List<ResponseOrderItemDto>();
+        public string StaffName { get; set; }
+        public List<ResponseOrderItemDto> OrderItems { get; set; }
     }
 
 }
